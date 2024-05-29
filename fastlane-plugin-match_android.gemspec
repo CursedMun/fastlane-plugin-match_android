@@ -6,7 +6,7 @@ require 'fastlane/plugin/match_android/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'fastlane-plugin-match_android'
-  spec.version       = Fastlane::MatchKeystore::VERSION
+  spec.version       = Fastlane::MatchAndroid::VERSION
   spec.author        = 'Maikel Stuivenberg'
   spec.email         = 'maikel.stuivenberg@gmail.com'
 
