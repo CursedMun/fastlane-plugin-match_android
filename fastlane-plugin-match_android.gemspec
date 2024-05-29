@@ -2,16 +2,16 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'fastlane/plugin/match_keystore/version'
+require 'fastlane/plugin/match_android/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'fastlane-plugin-match_keystore'
+  spec.name          = 'fastlane-plugin-match_android'
   spec.version       = Fastlane::MatchKeystore::VERSION
-  spec.author        = 'Christopher NEY'
-  spec.email         = 'christopher.ney@gmail.com'
+  spec.author        = 'Maikel Stuivenberg'
+  spec.email         = 'maikel.stuivenberg@gmail.com'
 
-  spec.summary       = 'Easily sync your Android keystores across your team'
-  spec.homepage      = "https://github.com/christopherney/fastlane-plugin-match_keystore"
+  spec.summary       = 'Share your Android keystore with your team in a secure way'
+  spec.homepage      = "https://github.com/maikelstuivenberg/fastlane-plugin-match-keystore"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)

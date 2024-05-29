@@ -1,4 +1,4 @@
-require 'fastlane/plugin/match_keystore/version'
+require 'fastlane/plugin/match_android/version'
 
 module Fastlane
   module MatchKeystore

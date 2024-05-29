@@ -9,7 +9,7 @@ module Fastlane
       # as `Helper::MatchKeystoreHelper.your_method`
       #
       def self.show_message
-        UI.message("Hello from the match_keystore plugin helper!")
+        UI.message("Hello from the match_android plugin helper!")
       end
     end
   end

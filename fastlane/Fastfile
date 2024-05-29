@@ -5,11 +5,11 @@ lane :temp do |options|
   puts '--- UNIT TESTS                                 ---'
   puts '--------------------------------------------------'
 
-  match_keystore(
+  match_android(
     git_url: "https://bitbucket.org/SoClipTeam/keystores.git",
     package_name: "com.soclip.sdksamplecode",
     apk_path: "assets/app-release-unsigned.apk",
-    match_secret: ENV["MATCH_KEYSTORE_PASSWORD"],
+    match_secret: ENV["MATCH_ANDROID_PASSWORD"],
     zip_align: false,
     compat_key: "1"
   )
@@ -22,7 +22,7 @@ lane :unit_test do |options|
   puts '--- UNIT TESTS                                 ---'
   puts '--------------------------------------------------'
 
-  match_keystore(
+  match_android(
     git_url: "https://github.com/christopherney/fake-keystores",
     package_name: "com.match-keystore-plugin.test",
     apk_path: "assets/app-release-unsigned.apk",
@@ -38,7 +38,7 @@ lane :test_zip_align do |options|
   puts '--- UNIT TESTS                                 ---'
   puts '--------------------------------------------------'
 
-  match_keystore(
+  match_android(
     git_url: "https://github.com/christopherney/fake-keystores",
     package_name: "com.match-keystore-plugin.test",
     apk_path: "assets/app-release-unsigned.apk",
@@ -55,7 +55,7 @@ lane :test do |options|
   puts '--- First signature, test remote configuration ---'
   puts '--------------------------------------------------'
 
-  match_keystore(
+  match_android(
     git_url: "https://github.com/christopherney/fake-keystores",
     package_name: "com.match-keystore-plugin.test",
     apk_path: "assets/app-release-unsigned.apk",
@@ -63,15 +63,15 @@ lane :test do |options|
     clear_keystore: true
   )
 
-  puts 'Keystore Path: ' + lane_context[SharedValues::MATCH_KEYSTORE_PATH]
-  puts 'Keystore Alias Name: ' + lane_context[SharedValues::MATCH_KEYSTORE_ALIAS_NAME]
-  puts 'Signed APK: ' + lane_context[SharedValues::MATCH_KEYSTORE_APK_SIGNED]
+  puts 'Keystore Path: ' + lane_context[SharedValues::MATCH_ANDROID_PATH]
+  puts 'Keystore Alias Name: ' + lane_context[SharedValues::MATCH_ANDROID_ALIAS_NAME]
+  puts 'Signed APK: ' + lane_context[SharedValues::MATCH_ANDROID_APK_SIGNED]
   
   puts '------------------------------------------------------'
   puts '--- Second signature, override keystore            ---'
   puts '------------------------------------------------------'
 
-  match_keystore(
+  match_android(
   	git_url: "https://github.com/christopherney/fake-keystores",
   	package_name: "com.match-keystore-plugin.test",
     apk_path: "assets/app-release-unsigned.apk",
@@ -81,23 +81,23 @@ lane :test do |options|
     keystore_data: "assets/keystore.json"
   )
 
-  puts 'Keystore Path: ' + lane_context[SharedValues::MATCH_KEYSTORE_PATH]
-  puts 'Keystore Alias Name: ' + lane_context[SharedValues::MATCH_KEYSTORE_ALIAS_NAME]
-  puts 'Signed APK: ' + lane_context[SharedValues::MATCH_KEYSTORE_APK_SIGNED]
+  puts 'Keystore Path: ' + lane_context[SharedValues::MATCH_ANDROID_PATH]
+  puts 'Keystore Alias Name: ' + lane_context[SharedValues::MATCH_ANDROID_ALIAS_NAME]
+  puts 'Signed APK: ' + lane_context[SharedValues::MATCH_ANDROID_APK_SIGNED]
 
   puts '--------------------------------------------------'
   puts '--- Third signature, test local configuration ---'
   puts '--------------------------------------------------'
 
-  match_keystore(
+  match_android(
     git_url: "https://github.com/christopherney/fake-keystores",
     package_name: "com.match-keystore-plugin.test",
     apk_path: "assets/app-release-unsigned.apk",
     match_secret: "A-very-str0ng-password!"
   )
 
-  puts 'Keystore Path: ' + lane_context[SharedValues::MATCH_KEYSTORE_PATH]
-  puts 'Keystore Alias Name: ' + lane_context[SharedValues::MATCH_KEYSTORE_ALIAS_NAME]
-  puts 'Signed APK: ' + lane_context[SharedValues::MATCH_KEYSTORE_APK_SIGNED]
+  puts 'Keystore Path: ' + lane_context[SharedValues::MATCH_ANDROID_PATH]
+  puts 'Keystore Alias Name: ' + lane_context[SharedValues::MATCH_ANDROID_ALIAS_NAME]
+  puts 'Signed APK: ' + lane_context[SharedValues::MATCH_ANDROID_APK_SIGNED]
 
 end

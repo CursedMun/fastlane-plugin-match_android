@@ -1,6 +1,6 @@
-# match_keystore plugin
+# match_android plugin
 
-[![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-match_keystore)
+[![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-match_android)
 
 ## Machine requirements
 
@@ -11,19 +11,21 @@
 
 ## Getting Started
 
-This project is a [_fastlane_](https://github.com/fastlane/fastlane) plugin. To get started with `fastlane-plugin-match_keystore`, add it to your project by running:
+This project is a [_fastlane_](https://github.com/fastlane/fastlane) plugin. To get started with `fastlane-plugin-match_android`, add it to your project by running:
 
 ```bash
-fastlane add_plugin match_keystore
+fastlane add_plugin match_android
 ```
 
-## About match_keystore
+## About match_android
+
+*This repo is a fork of [fastlane-plugin-match_keystore](https://github.com/christopherney/fastlane-plugin-match_keystore) with some improvements and bug fixes. The original plugin was not maintained anymore. This updated package is published under a new name to be able to publish & install the plugin.*
 
 Easily sync your Android keystores across your team.
 
 This plugin was design based on the 'match' plugin and code signing concept: https://codesigning.guide/
 
-With **match_keystore** you can store all your Android Keystores in secured private repository and share it to your team and your CI system.
+With **match_android** you can store all your Android Keystores in secured private repository and share it to your team and your CI system.
 
 The keystore properties are encrypted with AES in order to secure sensitive data in the Git repository itself.
 
@@ -34,7 +36,7 @@ The keystore properties are encrypted with AES in order to secure sensitive data
     gradle(task: "clean")
     gradle(task: 'assemble', build_type: 'Release')
 
-    signed_apk_path = match_keystore(
+    signed_apk_path = match_android(
       git_url: "https://github.com/<GITHUB_USERNAME>/keystores.git", # Please use a private Git repository !
       package_name: "com.your.package.name",
       apk_path: "/app/build/outputs/apk/app-release.apk" # Or path without APK: /app/build/outputs/apk/

@@ -3,15 +3,15 @@ require 'fileutils'
 require 'os'
 require 'json'
 require 'digest'
-require_relative '../helper/match_keystore_helper'
+require_relative '../helper/match_android_helper'
 
 module Fastlane
   module Actions
     module SharedValues
-      MATCH_KEYSTORE_PATH = :MATCH_KEYSTORE_PATH
-      MATCH_KEYSTORE_ALIAS_NAME = :MATCH_KEYSTORE_ALIAS_NAME
-      MATCH_KEYSTORE_APK_SIGNED = :MATCH_KEYSTORE_APK_SIGNED
-      MATCH_KEYSTORE_AAB_SIGNED = :MATCH_KEYSTORE_AAB_SIGNED
+      MATCH_ANDROID_PATH = :MATCH_ANDROID_PATH
+      MATCH_ANDROID_ALIAS_NAME = :MATCH_ANDROID_ALIAS_NAME
+      MATCH_ANDROID_APK_SIGNED = :MATCH_ANDROID_APK_SIGNED
+      MATCH_ANDROID_AAB_SIGNED = :MATCH_ANDROID_AAB_SIGNED
     end
 
     class MatchKeystoreAction < Action
@@ -449,9 +449,9 @@ module Fastlane
         end
 
         # Init workign local directory:
-        dir_name = ENV['HOME'] + '/.match_keystore'
+        dir_name = ENV['HOME'] + '/.match_android'
         unless File.directory?(dir_name)
-          UI.message("Creating '.match_keystore' working directory...")
+          UI.message("Creating '.match_android' working directory...")
           FileUtils.mkdir_p(dir_name)
         end
 
@@ -572,7 +572,7 @@ module Fastlane
             ]
             sh keytool_parts.join(" ")
           else
-            UI.message("Copy existing keystore to match_keystore repository...") 
+            UI.message("Copy existing keystore to match_android repository...") 
             `cp #{existing_keystore} #{keystore_path}`
           end
 
@@ -645,9 +645,9 @@ module Fastlane
           end 
 
           # Prepare contect shared values for next lanes:
-          Actions.lane_context[SharedValues::MATCH_KEYSTORE_PATH] = keystore_path
-          Actions.lane_context[SharedValues::MATCH_KEYSTORE_ALIAS_NAME] = alias_name
-          Actions.lane_context[SharedValues::MATCH_KEYSTORE_APK_SIGNED] = output_signed_apk
+          Actions.lane_context[SharedValues::MATCH_ANDROID_PATH] = keystore_path
+          Actions.lane_context[SharedValues::MATCH_ANDROID_ALIAS_NAME] = alias_name
+          Actions.lane_context[SharedValues::MATCH_ANDROID_APK_SIGNED] = output_signed_apk
 
           output_signed_apk
         # Sign AAB
@@ -673,9 +673,9 @@ module Fastlane
           end 
 
           # Prepare contect shared values for next lanes:
-          Actions.lane_context[SharedValues::MATCH_KEYSTORE_PATH] = keystore_path
-          Actions.lane_context[SharedValues::MATCH_KEYSTORE_ALIAS_NAME] = alias_name
-          Actions.lane_context[SharedValues::MATCH_KEYSTORE_AAB_SIGNED] = output_signed_aab
+          Actions.lane_context[SharedValues::MATCH_ANDROID_PATH] = keystore_path
+          Actions.lane_context[SharedValues::MATCH_ANDROID_ALIAS_NAME] = alias_name
+          Actions.lane_context[SharedValues::MATCH_ANDROID_AAB_SIGNED] = output_signed_aab
 
           output_signed_aab
         else
@@ -697,10 +697,10 @@ module Fastlane
 
       def self.output
         [
-          ['MATCH_KEYSTORE_PATH', 'File path of the Keystore fot the App.'],
-          ['MATCH_KEYSTORE_ALIAS_NAME', 'Keystore Alias Name.'],
-          ['MATCH_KEYSTORE_APK_SIGNED', 'Path of the signed APK.'],
-          ['MATCH_KEYSTORE_AAB_SIGNED', 'Path of the signed AAB.']
+          ['MATCH_ANDROID_PATH', 'File path of the Keystore fot the App.'],
+          ['MATCH_ANDROID_ALIAS_NAME', 'Keystore Alias Name.'],
+          ['MATCH_ANDROID_APK_SIGNED', 'Path of the signed APK.'],
+          ['MATCH_ANDROID_AAB_SIGNED', 'Path of the signed AAB.']
         ]
       end
 
@@ -712,67 +712,67 @@ module Fastlane
       def self.available_options
         [
           FastlaneCore::ConfigItem.new(key: :git_url,
-                                   env_name: "MATCH_KEYSTORE_GIT_URL",
+                                   env_name: "MATCH_ANDROID_GIT_URL",
                                 description: "The URL of the Git repository (Github, BitBucket...)",
                                    optional: false,
                                        type: String),
           FastlaneCore::ConfigItem.new(key: :package_name,
-                                   env_name: "MATCH_KEYSTORE_PACKAGE_NAME",
+                                   env_name: "MATCH_ANDROID_PACKAGE_NAME",
                                 description: "The package name of the App",
                                    optional: false,
                                        type: String),
           FastlaneCore::ConfigItem.new(key: :apk_path,
-                                   env_name: "MATCH_KEYSTORE_APK_PATH",
+                                   env_name: "MATCH_ANDROID_APK_PATH",
                                 description: "Path of the APK file to sign",
                                    optional: true,
                                        type: String),
           FastlaneCore::ConfigItem.new(key: :aab_path,
-                                   env_name: "MATCH_KEYSTORE_AAB_PATH",
+                                   env_name: "MATCH_ANDROID_AAB_PATH",
                                 description: "Path of the AAB file to sign",
                                    optional: true,
                                        type: String),
           FastlaneCore::ConfigItem.new(key: :match_secret,
-                                   env_name: "MATCH_KEYSTORE_SECRET",
+                                   env_name: "MATCH_ANDROID_SECRET",
                                 description: "Secret to decrypt keystore.properties file (CI)",
                                    optional: true,
                                        type: String),
           FastlaneCore::ConfigItem.new(key: :existing_keystore,
-                                   env_name: "MATCH_KEYSTORE_EXISTING",
+                                   env_name: "MATCH_ANDROID_EXISTING",
                                 description: "Path of an existing Keystore",
                                    optional: true,
                                        type: String),
           FastlaneCore::ConfigItem.new(key: :override_keystore,
-                                   env_name: "MATCH_KEYSTORE_OVERRIDE",
+                                   env_name: "MATCH_ANDROID_OVERRIDE",
                                 description: "Override an existing Keystore (false by default)",
                                    optional: true,
                                        type: Boolean),
           FastlaneCore::ConfigItem.new(key: :keystore_data,
-                                   env_name: "MATCH_KEYSTORE_JSON_PATH",
+                                   env_name: "MATCH_ANDROID_JSON_PATH",
                                 description: "Required data to import an existing keystore, or create a new one",
                                    optional: true,
                                        type: String),
           FastlaneCore::ConfigItem.new(key: :build_tools_version,
-                                   env_name: "MATCH_KEYSTORE_BUILD_TOOLS_VERSION",
+                                   env_name: "MATCH_ANDROID_BUILD_TOOLS_VERSION",
                                 description: "Set built-tools version (by default latest available on machine)",
                                    optional: true,
                                        type: String),      
           FastlaneCore::ConfigItem.new(key: :zip_align,
-                                   env_name: "MATCH_KEYSTORE_ZIPALIGN",
+                                   env_name: "MATCH_ANDROID_ZIPALIGN",
                                 description: "Define if plugin will run zipalign on APK before sign it (true by default)",
                                    optional: true,
                                        type: Boolean),                    
           FastlaneCore::ConfigItem.new(key: :compat_key,
-                                   env_name: "MATCH_KEYSTORE_COMPAT_KEY",
+                                   env_name: "MATCH_ANDROID_COMPAT_KEY",
                                 description: "Define the compatibility key version used on local machine (nil by default)",
                                    optional: true,
                                        type: String),
           FastlaneCore::ConfigItem.new(key: :clear_keystore,
-                                   env_name: "MATCH_KEYSTORE_CLEAR",
+                                   env_name: "MATCH_ANDROID_CLEAR",
                                 description: "Clear the local keystore (false by default)",
                                    optional: true,
                                        type: Boolean),
           FastlaneCore::ConfigItem.new(key: :unit_test,
-                                   env_name: "MATCH_KEYSTORE_UNIT_TESTS",
+                                   env_name: "MATCH_ANDROID_UNIT_TESTS",
                                 description: "launch Unit Tests (false by default)",
                                    optional: true,
                                        type: Boolean)
