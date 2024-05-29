@@ -1,5 +1,5 @@
 module Fastlane
-  module MatchKeystore
-    VERSION = "0.3.0"
+  module MatchAndroid
+    VERSION = "0.3.1"
   end
 end

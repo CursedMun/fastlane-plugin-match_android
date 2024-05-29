@@ -4,9 +4,9 @@ module Fastlane
   UI = FastlaneCore::UI unless Fastlane.const_defined?("UI")
 
   module Helper
-    class MatchKeystoreHelper
+    class MatchAndroidHelper
       # class methods that you define here become available in your action
-      # as `Helper::MatchKeystoreHelper.your_method`
+      # as `Helper::MatchAndroidHelper.your_method`
       #
       def self.show_message
         UI.message("Hello from the match_android plugin helper!")

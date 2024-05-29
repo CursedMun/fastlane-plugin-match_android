@@ -14,7 +14,7 @@ module Fastlane
       MATCH_ANDROID_AAB_SIGNED = :MATCH_ANDROID_AAB_SIGNED
     end
 
-    class MatchKeystoreAction < Action
+    class MatchAndroidAction < Action
 
       KEY_VERSION = "2"
       OPENSSL_BIN_PATH_MAC = "/usr/local/opt/openssl@1.1/bin"
