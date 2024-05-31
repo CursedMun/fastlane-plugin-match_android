@@ -560,6 +560,9 @@ module Fastlane
             city_locality = self.prompt2(text: "Certificate City or Locality: ", value: data_city_locality) 
             state_province = self.prompt2(text: "Certificate State or Province: ", value: data_state_province)
             country = self.prompt2(text: "Certificate Country Code (XX): ", value: data_country)
+
+            # Make sure the directory exists
+            FileUtils.mkdir_p keystoreAppDir
             
             keytool_parts = [
               "keytool -genkey -v",
