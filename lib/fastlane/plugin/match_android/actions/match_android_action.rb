@@ -105,11 +105,11 @@ module Fastlane
         UI.message("SSL/TLS protocol version: '#{version}'")
         if self.is_libre_ssl(forceOpenSSL)
           if Gem::Version.new(version) < Gem::Version.new(libressl_min)
-            raise "Minimum version for LibreSSL is '#{libressl_min}', please update it. Use homebrew is your are Mac user, and update ~/.bash_profile or ~/.zprofile"
+            raise "Minimum version for LibreSSL is '#{libressl_min}' (you're on '#{version}'), please update it."
           end
         else
-          if Gem::Version.new(version) > Gem::Version.new(openssl_min)
-            raise "Minimum version for OpenSSL is '#{openssl_min}' (you're on '#{version}'), please update it. Use homebrew is your are Mac user, and update ~/.bash_profile or ~/.zprofile"
+          if Gem::Version.new(version) < Gem::Version.new(openssl_min)
+            raise "Minimum version for OpenSSL is '#{openssl_min}' (you're on '#{version}'), please update it."
           end
         end
 
