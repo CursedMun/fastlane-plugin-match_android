@@ -1,5 +1,5 @@
 module Fastlane
-  module MatchAndroid
+  module MatchAndroidV2
     VERSION = "0.3.5"
   end
 end

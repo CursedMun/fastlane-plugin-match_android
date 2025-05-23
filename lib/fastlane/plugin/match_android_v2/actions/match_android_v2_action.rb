@@ -3,7 +3,7 @@ require 'fileutils'
 require 'os'
 require 'json'
 require 'digest'
-require_relative '../helper/match_android_helper'
+require_relative '../helper/match_android_v2_helper'
 
 module Fastlane
   module Actions
@@ -14,7 +14,7 @@ module Fastlane
       MATCH_ANDROID_AAB_SIGNED = :MATCH_ANDROID_AAB_SIGNED
     end
 
-    class MatchAndroidAction < Action
+    class MatchAndroidV2Action < Action
 
       KEY_VERSION = "2"
       OPENSSL_BIN_PATH_MAC = "/usr/local/opt/openssl@1.1/bin"
