@@ -420,6 +420,7 @@ module Fastlane
         build_tools_version = params[:build_tools_version]
         zip_align = params[:zip_align]
         compat_key = params[:compat_key]
+        ci_mode = params[:ci_mode]
 
         # Test OpenSSL/LibreSSL
         if unit_test
@@ -602,12 +603,14 @@ module Fastlane
           keystore_info_path = File.join(keystoreAppDir, keystore_info_name)
           `yes "" | keytool -list -v -keystore '#{keystore_path}' -storepass '#{key_password}' > '#{keystore_info_path}'`
           
-          UI.message("Upload new Keystore to remote repository...")
-          puts ''
-          `cd '#{repo_dir}' && git add .`
-          `cd '#{repo_dir}' && git commit -m "[ADD] Keystore for app '#{package_name}'."`
-          `cd '#{repo_dir}' && git push`
-          puts ''
+          if !ci_mode
+            UI.message("Upload new Keystore to remote repository...")
+            puts ''
+            `cd '#{repo_dir}' && git add .`
+            `cd '#{repo_dir}' && git commit -m "[ADD] Keystore for app '#{package_name}'."`
+            `cd '#{repo_dir}' && git push`
+            puts ''
+          end
 
         else  
           UI.message "Keystore file already exists, continue..."
@@ -777,6 +780,11 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :unit_test,
                                    env_name: "MATCH_ANDROID_UNIT_TESTS",
                                 description: "launch Unit Tests (false by default)",
+                                   optional: true,
+                                       type: Boolean),
+          FastlaneCore::ConfigItem.new(key: :ci_mode,
+                                   env_name: "CI_MODE",
+                                description: "Don't push the keys to repository even if they don't exist (false by default)",
                                    optional: true,
                                        type: Boolean)
         ]

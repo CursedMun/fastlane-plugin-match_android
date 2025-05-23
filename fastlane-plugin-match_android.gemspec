@@ -5,13 +5,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'fastlane/plugin/match_android/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'fastlane-plugin-match_android'
+  spec.name          = 'fastlane-plugin-match_android_v2'
   spec.version       = Fastlane::MatchAndroid::VERSION
   spec.author        = 'Maikel Stuivenberg'
   spec.email         = 'maikel.stuivenberg@gmail.com'
 
   spec.summary       = 'Share your Android keystore with your team in a secure way'
-  spec.homepage      = "https://github.com/maikelstuivenberg/fastlane-plugin-match_android"
+  spec.homepage      = "https://github.com/CursedMun/fastlane-plugin-match_android"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
