@@ -1,4 +1,4 @@
-require 'fastlane/plugin/match_android/version'
+require 'fastlane/plugin/match_android_v2/version'
 
 module Fastlane
   module MatchAndroidV2

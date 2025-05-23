@@ -7,8 +7,8 @@ require 'fastlane/plugin/match_android_v2/version'
 Gem::Specification.new do |spec|
   spec.name          = 'fastlane-plugin-match_android_v2'
   spec.version       = Fastlane::MatchAndroidV2::VERSION
-  spec.author        = 'Maikel Stuivenberg'
-  spec.email         = 'maikel.stuivenberg@gmail.com'
+  spec.author        = 'Foo Bar'
+  spec.email         = 'dummyemail@gmail.com'
 
   spec.summary       = 'Share your Android keystore with your team in a secure way'
   spec.homepage      = "https://github.com/CursedMun/fastlane-plugin-match_android"
