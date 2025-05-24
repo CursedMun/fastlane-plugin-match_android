@@ -603,13 +603,15 @@ module Fastlane
           keystore_info_path = File.join(keystoreAppDir, keystore_info_name)
           `yes "" | keytool -list -v -keystore '#{keystore_path}' -storepass '#{key_password}' > '#{keystore_info_path}'`
           
-          if !ci_mode
+          if ci_mode == true
             UI.message("Upload new Keystore to remote repository...")
             puts ''
             `cd '#{repo_dir}' && git add .`
             `cd '#{repo_dir}' && git commit -m "[ADD] Keystore for app '#{package_name}'."`
             `cd '#{repo_dir}' && git push`
             puts ''
+          else
+            UI.message("Skipping add to github")
           end
 
         else  
