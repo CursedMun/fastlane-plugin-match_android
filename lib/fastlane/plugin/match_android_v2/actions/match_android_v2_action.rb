@@ -603,7 +603,7 @@ module Fastlane
           keystore_info_path = File.join(keystoreAppDir, keystore_info_name)
           `yes "" | keytool -list -v -keystore '#{keystore_path}' -storepass '#{key_password}' > '#{keystore_info_path}'`
           
-          if ci_mode == true
+          if ci_mode == false
             UI.message("Upload new Keystore to remote repository...")
             puts ''
             `cd '#{repo_dir}' && git add .`
